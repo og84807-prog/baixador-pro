@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Baixador Social Pro — Baixe vídeos de qualquer rede no celular</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --verde:   #00ff88;
+  --verde2:  #00cc6a;
+  --escuro:  #050a0e;
+  --card:    #0b1217;
+  --borda:   #1a2a35;
+  --texto:   #c8dde8;
+  --branco:  #eaf4fb;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+html{scroll-behavior:smooth;}
+
+body{
+  background:var(--escuro);
+  color:var(--texto);
+  font-family:'Syne',sans-serif;
+  overflow-x:hidden;
+}
+
+/* ── GRID DE FUNDO ── */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(0,255,136,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,136,.03) 1px, transparent 1px);
+  background-size:40px 40px;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ── SCANLINES ── */
+body::after{
+  content:'';
+  position:fixed;inset:0;
+  background:repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,.08) 2px,
+    rgba(0,0,0,.08) 4px
+  );
+  pointer-events:none;
+  z-index:0;
+}
+
+section,nav,footer{position:relative;z-index:1;}
+
+/* ── NAV ── */
+nav{
+  display:flex;justify-content:center;align-items:center;
+  padding:1.2rem 2rem;
+  border-bottom:1px solid var(--borda);
+  background:rgba(5,10,14,.85);
+  backdrop-filter:blur(12px);
+  position:sticky;top:0;z-index:100;
+}
+.logo{
+  font-family:'JetBrains Mono',monospace;
+  font-size:1rem;
+  color:var(--verde);
+  letter-spacing:.05em;
+}
+.logo span{color:var(--branco);}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  text-align:center;
+  padding:6rem 1.5rem 4rem;
+  gap:2rem;
+}
+
+.badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(0,255,136,.08);
+  border:1px solid rgba(0,255,136,.25);
+  border-radius:999px;
+  padding:.4rem 1.1rem;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.75rem;
+  color:var(--verde);
+  letter-spacing:.08em;
+  animation:fadeDown .6s ease both;
+}
+
+.hero h1{
+  font-size:clamp(2.4rem,8vw,5rem);
+  font-weight:800;
+  line-height:1.05;
+  color:var(--branco);
+  max-width:800px;
+  animation:fadeUp .7s .1s ease both;
+}
+.hero h1 em{
+  font-style:normal;
+  color:var(--verde);
+  position:relative;
+}
+.hero h1 em::after{
+  content:'';
+  position:absolute;left:0;bottom:-4px;
+  width:100%;height:3px;
+  background:var(--verde);
+  border-radius:2px;
+}
+
+.hero-sub{
+  font-size:1.1rem;
+  color:var(--texto);
+  max-width:520px;
+  line-height:1.7;
+  animation:fadeUp .7s .2s ease both;
+}
+
+/* ── TERMINAL DEMO ── */
+.terminal{
+  background:#060d10;
+  border:1px solid var(--borda);
+  border-radius:12px;
+  width:100%;max-width:480px;
+  overflow:hidden;
+  box-shadow:0 0 60px rgba(0,255,136,.08), 0 20px 60px rgba(0,0,0,.6);
+  animation:fadeUp .7s .3s ease both;
+}
+.term-bar{
+  background:#0d1c24;
+  padding:.6rem 1rem;
+  display:flex;align-items:center;gap:.5rem;
+  border-bottom:1px solid var(--borda);
+}
+.dot{width:12px;height:12px;border-radius:50%;}
+.dot.r{background:#ff5f57;}
+.dot.y{background:#febc2e;}
+.dot.g{background:#28c840;}
+.term-title{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.7rem;color:#4a6a7a;
+  margin-left:.5rem;
+}
+.term-body{
+  padding:1.2rem 1.4rem;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.78rem;
+  line-height:1.9;
+}
+.tc{color:var(--verde);}
+.tw{color:var(--branco);}
+.td{color:#4a6a7a;}
+.ty{color:#febc2e;}
+
+/* ── CTA HERO ── */
+.btn-cta{
+  display:inline-flex;align-items:center;gap:.7rem;
+  background:var(--verde);
+  color:#050a0e;
+  font-family:'Syne',sans-serif;
+  font-weight:800;
+  font-size:1.1rem;
+  padding:1rem 2.4rem;
+  border-radius:8px;
+  text-decoration:none;
+  border:none;cursor:pointer;
+  transition:transform .15s, box-shadow .15s;
+  box-shadow:0 0 30px rgba(0,255,136,.3);
+  animation:fadeUp .7s .4s ease both;
+}
+.btn-cta:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 50px rgba(0,255,136,.45);
+}
+.btn-cta .preco{
+  font-size:.8rem;font-weight:600;
+  background:rgba(0,0,0,.2);
+  padding:.2rem .6rem;border-radius:4px;
+}
+
+.garantia-note{
+  font-size:.8rem;color:#4a6a7a;
+  animation:fadeUp .7s .5s ease both;
+}
+
+/* ── REDES ── */
+.redes-strip{
+  padding:3rem 1.5rem;
+  border-top:1px solid var(--borda);
+  border-bottom:1px solid var(--borda);
+  text-align:center;
+}
+.redes-strip p{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.75rem;color:#4a6a7a;
+  letter-spacing:.1em;margin-bottom:1.5rem;
+}
+.redes-grid{
+  display:flex;flex-wrap:wrap;
+  justify-content:center;gap:.6rem;
+  max-width:600px;margin:0 auto;
+}
+.rede-tag{
+  background:var(--card);
+  border:1px solid var(--borda);
+  border-radius:6px;
+  padding:.4rem .9rem;
+  font-size:.82rem;
+  color:var(--texto);
+  transition:border-color .2s, color .2s;
+}
+.rede-tag:hover{border-color:var(--verde);color:var(--verde);}
+
+/* ── SEÇÕES ── */
+.secao{
+  max-width:800px;margin:0 auto;
+  padding:5rem 1.5rem;
+}
+.secao-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.72rem;color:var(--verde);
+  letter-spacing:.15em;margin-bottom:1rem;
+}
+.secao h2{
+  font-size:clamp(1.8rem,5vw,2.8rem);
+  font-weight:800;color:var(--branco);
+  line-height:1.15;margin-bottom:2rem;
+}
+
+/* ── CARDS DE FUNCIONALIDADES ── */
+.features-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1rem;
+}
+.feat-card{
+  background:var(--card);
+  border:1px solid var(--borda);
+  border-radius:12px;
+  padding:1.4rem;
+  transition:border-color .2s, transform .2s;
+}
+.feat-card:hover{
+  border-color:var(--verde);
+  transform:translateY(-3px);
+}
+.feat-icon{font-size:1.6rem;margin-bottom:.8rem;}
+.feat-card h3{
+  font-size:1rem;font-weight:700;
+  color:var(--branco);margin-bottom:.4rem;
+}
+.feat-card p{font-size:.85rem;line-height:1.6;color:#7a9aaa;}
+
+/* ── PARA QUEM É ── */
+.pra-quem{
+  background:var(--card);
+  border:1px solid var(--borda);
+  border-radius:16px;
+  padding:2rem;
+}
+.check-item{
+  display:flex;align-items:flex-start;gap:.8rem;
+  padding:.7rem 0;
+  border-bottom:1px solid var(--borda);
+  font-size:.95rem;line-height:1.5;
+}
+.check-item:last-child{border-bottom:none;}
+.check-item .ck{color:var(--verde);font-size:1.1rem;flex-shrink:0;margin-top:.1rem;}
+
+/* ── O QUE INCLUI ── */
+.inclui-list{
+  display:flex;flex-direction:column;gap:.8rem;
+}
+.inclui-item{
+  display:flex;align-items:center;gap:1rem;
+  background:var(--card);
+  border:1px solid var(--borda);
+  border-radius:10px;
+  padding:1rem 1.2rem;
+}
+.inclui-item .num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.75rem;color:var(--verde);
+  background:rgba(0,255,136,.08);
+  border:1px solid rgba(0,255,136,.2);
+  border-radius:6px;
+  padding:.3rem .6rem;
+  flex-shrink:0;
+}
+.inclui-item p{font-size:.9rem;line-height:1.5;}
+.inclui-item p strong{color:var(--branco);}
+
+/* ── PREÇO ── */
+.preco-box{
+  background:var(--card);
+  border:1px solid var(--verde);
+  border-radius:20px;
+  padding:3rem 2rem;
+  text-align:center;
+  max-width:420px;
+  margin:0 auto;
+  box-shadow:0 0 60px rgba(0,255,136,.08);
+}
+.preco-de{
+  font-size:.9rem;color:#4a6a7a;
+  text-decoration:line-through;
+  margin-bottom:.3rem;
+}
+.preco-por{
+  font-size:3.5rem;font-weight:800;
+  color:var(--verde);line-height:1;
+  margin-bottom:.5rem;
+}
+.preco-por span{font-size:1.5rem;}
+.preco-desc{font-size:.85rem;color:#4a6a7a;margin-bottom:2rem;}
+.btn-cta-big{
+  display:block;
+  background:var(--verde);
+  color:#050a0e;
+  font-family:'Syne',sans-serif;
+  font-weight:800;
+  font-size:1.15rem;
+  padding:1.1rem 2rem;
+  border-radius:10px;
+  text-decoration:none;
+  text-align:center;
+  margin-bottom:1.2rem;
+  transition:transform .15s,box-shadow .15s;
+  box-shadow:0 0 30px rgba(0,255,136,.25);
+}
+.btn-cta-big:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 50px rgba(0,255,136,.4);
+}
+.garantia-box{
+  display:flex;align-items:center;gap:.6rem;
+  justify-content:center;
+  font-size:.82rem;color:#4a6a7a;
+}
+
+/* ── FAQ ── */
+.faq-list{display:flex;flex-direction:column;gap:.8rem;}
+.faq-item{
+  background:var(--card);
+  border:1px solid var(--borda);
+  border-radius:10px;
+  overflow:hidden;
+}
+.faq-q{
+  width:100%;background:none;border:none;
+  color:var(--branco);
+  font-family:'Syne',sans-serif;
+  font-size:.95rem;font-weight:700;
+  padding:1.1rem 1.3rem;
+  text-align:left;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;
+  gap:1rem;
+}
+.faq-q .arr{color:var(--verde);font-size:1rem;transition:transform .2s;flex-shrink:0;}
+.faq-item.open .arr{transform:rotate(180deg);}
+.faq-a{
+  display:none;
+  padding:0 1.3rem 1.1rem;
+  font-size:.88rem;line-height:1.7;
+  color:#7a9aaa;
+}
+.faq-item.open .faq-a{display:block;}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid var(--borda);
+  padding:2.5rem 1.5rem;
+  text-align:center;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.75rem;
+  color:#2a4a5a;
+}
+
+/* ── ANIMAÇÕES ── */
+@keyframes fadeDown{
+  from{opacity:0;transform:translateY(-15px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal{
+  opacity:0;transform:translateY(30px);
+  transition:opacity .6s ease, transform .6s ease;
+}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ── DIVISOR ── */
+.div-verde{
+  width:60px;height:3px;
+  background:var(--verde);
+  border-radius:2px;
+  margin:0 auto 3rem;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">$ <span>baixador</span>_social_pro<span style="color:var(--verde)">█</span></div>
+</nav>
+
+<section class="hero">
+  <div class="badge">🎬 FUNCIONA 100% NO ANDROID</div>
+
+  <h1>Baixe vídeos de <em>qualquer rede</em> direto no seu celular</h1>
+
+  <p class="hero-sub">
+    Um programa completo com menu no terminal. Instale no Termux, cole o link e pronto —
+    TikTok, YouTube, Instagram, Facebook e mais de <strong style="color:var(--branco)">1000 sites</strong> suportados.
+  </p>
+
+  <div class="terminal">
+    <div class="term-bar">
+      <div class="dot r"></div>
+      <div class="dot y"></div>
+      <div class="dot g"></div>
+      <span class="term-title">termux — baixador.py</span>
+    </div>
+    <div class="term-body">
+      <div><span class="tc">╔══════════════════════════════════════╗</span></div>
+      <div><span class="tc">║  🎬  BAIXADOR SOCIAL PRO  v1.1       ║</span></div>
+      <div><span class="tc">╚══════════════════════════════════════╝</span></div>
+      <div>&nbsp;</div>
+      <div><span class="tw">[1]</span> <span class="td">📥 Baixar vídeo / áudio</span></div>
+      <div><span class="tw">[2]</span> <span class="td">📋 Redes sociais suportadas</span></div>
+      <div><span class="tw">[3]</span> <span class="td">🔧 Ferramentas e atualização</span></div>
+      <div><span class="tw">[4]</span> <span class="td">📜 Histórico de downloads</span></div>
+      <div>&nbsp;</div>
+      <div><span class="ty">Escolha uma opção: </span><span class="tc">1</span></div>
+      <div>&nbsp;</div>
+      <div><span class="td">Cole o link aqui: </span><span class="tw">https://tiktok.com/...</span></div>
+      <div>&nbsp;</div>
+      <div><span class="tc">✓ Download concluído!</span></div>
+      <div><span class="td">📂 Salvo em: Downloads/BaixadorSocialPro/TikTok/</span></div>
+    </div>
+  </div>
+
+  <a href="https://pay.kiwify.com.br/GHClPOs" class="btn-cta">
+    ⚡ QUERO BAIXAR AGORA
+    <span class="preco">R$ 37</span>
+  </a>
+
+  <p class="garantia-note">🔒 Pagamento seguro · Entrega imediata · Acesso vitalício</p>
+</section>
+
+<div class="redes-strip">
+  <p>// REDES SUPORTADAS</p>
+  <div class="redes-grid">
+    <span class="rede-tag">🎵 TikTok</span>
+    <span class="rede-tag">▶️ YouTube</span>
+    <span class="rede-tag">📸 Instagram</span>
+    <span class="rede-tag">🐦 Twitter / X</span>
+    <span class="rede-tag">👤 Facebook</span>
+    <span class="rede-tag">📌 Pinterest</span>
+    <span class="rede-tag">📹 Kwai</span>
+    <span class="rede-tag">🎮 Twitch</span>
+    <span class="rede-tag">🎧 SoundCloud</span>
+    <span class="rede-tag">📺 Rumble</span>
+    <span class="rede-tag">🧵 Threads</span>
+    <span class="rede-tag">🌐 +1000 sites</span>
+  </div>
+</div>
+
+<section class="secao reveal">
+  <div class="secao-label">// O QUE O PROGRAMA FAZ</div>
+  <h2>Tudo que você precisa em um só lugar</h2>
+  <div class="div-verde"></div>
+  <div class="features-grid">
+    <div class="feat-card">
+      <div class="feat-icon">📥</div>
+      <h3>Download com 1 link</h3>
+      <p>Cole o link, escolha o formato e o vídeo vai direto pro seu celular.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📂</div>
+      <h3>Pastas automáticas</h3>
+      <p>Cada rede social ganha sua própria pasta dentro de Downloads. Tudo organizado.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🎵</div>
+      <h3>Vídeo ou áudio</h3>
+      <p>Baixe em MP4 (até 1080p) ou extraia só o áudio em MP3 ou M4A.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🔧</div>
+      <h3>Auto-atualização</h3>
+      <p>Menu de ferramentas pra instalar e atualizar tudo com um clique.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📜</div>
+      <h3>Histórico</h3>
+      <p>Veja os últimos 50 downloads com data, rede e status.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🌐</div>
+      <h3>+1000 sites</h3>
+      <p>Powered by yt-dlp — o motor de downloads mais completo do mundo.</p>
+    </div>
+  </div>
+</section>
+
+<section class="secao reveal" style="padding-top:0;">
+  <div class="secao-label">// PARA QUEM É</div>
+  <h2>Este produto é pra você se…</h2>
+  <div class="div-verde"></div>
+  <div class="pra-quem">
+    <div class="check-item"><span class="ck">✓</span><span>Quer baixar vídeos do TikTok, YouTube ou Instagram sem aplicativo cheio de anúncio</span></div>
+    <div class="check-item"><span class="ck">✓</span><span>Nunca programou nada e quer algo simples de usar</span></div>
+    <div class="check-item"><span class="ck">✓</span><span>Quer salvar músicas do YouTube em MP3 no celular</span></div>
+    <div class="check-item"><span class="ck">✓</span><span>Está aprendendo a usar o Termux e quer uma ferramenta prática</span></div>
+    <div class="check-item"><span class="ck">✓</span><span>Não quer pagar mensalidade de app — paga uma vez e usa pra sempre</span></div>
+    <div class="check-item"><span class="ck">✓</span><span>Quer ter os arquivos salvos no próprio celular, sem depender de nuvem</span></div>
+  </div>
+</section>
+
+<section class="secao reveal" style="padding-top:0;">
+  <div class="secao-label">// O QUE VOCÊ RECEBE</div>
+  <h2>Tudo incluso no pack</h2>
+  <div class="div-verde"></div>
+  <div class="inclui-list">
+    <div class="inclui-item">
+      <span class="num">01</span>
+      <p><strong>baixador.py</strong> — programa principal com menu completo no terminal</p>
+    </div>
+    <div class="inclui-item">
+      <span class="num">02</span>
+      <p><strong>instalar.sh</strong> — instalador automático, configura tudo em minutos</p>
+    </div>
+    <div class="inclui-item">
+      <span class="num">03</span>
+      <p><strong>LEIA_PRIMEIRO.txt</strong> — guia passo a passo pra iniciante absoluto</p>
+    </div>
+    <div class="inclui-item">
+      <span class="num">04</span>
+      <p><strong>Suporte via e-mail</strong> — tire suas dúvidas após a compra</p>
+    </div>
+  </div>
+</section>
+
+<section class="secao reveal" style="padding-top:0;text-align:center;">
+  <div class="secao-label" style="text-align:center;">// INVESTIMENTO</div>
+  <h2>Acesso vitalício por apenas</h2>
+  <div class="div-verde"></div>
+  <div class="preco-box">
+    <p class="preco-de">De R$ 97</p>
+    <p class="preco-por"><span>R$</span> 37</p>
+    <p class="preco-desc">pagamento único · sem mensalidade</p>
+    <a href="https://pay.kiwify.com.br/GHClPOs" class="btn-cta-big">⚡ COMPRAR AGORA</a>
+    <div class="garantia-box">
+      🔒 Pagamento seguro pela Kiwify
+    </div>
+  </div>
+</section>
+
+<section class="secao reveal" style="padding-top:0;">
+  <div class="secao-label">// DÚVIDAS FREQUENTES</div>
+  <h2>Perguntas e respostas</h2>
+  <div class="div-verde"></div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q">Precisa saber programar pra usar? <span class="arr">▼</span></button>
+      <div class="faq-a">Não! O programa tem menu com números. Você só digita a opção, cola o link e pronto. O guia incluso explica tudo passo a passo.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Funciona em qual versão do Android? <span class="arr">▼</span></button>
+      <div class="faq-a">Funciona no Android 7 ou superior com o Termux instalado. Testado no Android 12 e 13.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Funciona no iPhone? <span class="arr">▼</span></button>
+      <div class="faq-a">Este produto foi desenvolvido especificamente para Android via Termux. No iPhone não é suportado.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Como recebo o produto após a compra? <span class="arr">▼</span></button>
+      <div class="faq-a">Imediatamente após o pagamento você recebe o link de download no e-mail. O arquivo .zip com tudo incluso.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Funciona pra baixar vídeos privados? <span class="arr">▼</span></button>
+      <div class="faq-a">Apenas vídeos públicos podem ser baixados. Vídeos privados ou com restrição de acesso não são suportados.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Precisa pagar mensalidade? <span class="arr">▼</span></button>
+      <div class="faq-a">Não! É pagamento único. Você compra uma vez e usa para sempre, com atualizações inclusas.</div>
+    </div>
+  </div>
+</section>
+
+<section class="secao reveal" style="text-align:center;padding-top:0;">
+  <h2 style="margin-bottom:1rem;">Pronto pra começar?</h2>
+  <p style="color:#7a9aaa;margin-bottom:2rem;font-size:.95rem;">Baixe agora e instale em menos de 5 minutos.</p>
+  <a href="https://pay.kiwify.com.br/GHClPOs" class="btn-cta" style="display:inline-flex;">
+    ⚡ QUERO O BAIXADOR SOCIAL PRO
+    <span class="preco">R$ 37</span>
+  </a>
+  <p style="margin-top:1rem;font-size:.8rem;color:#2a4a5a;">🔒 Pagamento seguro · Entrega imediata</p>
+</section>
+
+<footer>
+  <p>© 2026 Baixador Social Pro · Todos os direitos reservados</p>
+  <p style="margin-top:.5rem;">Desenvolvido com Python + yt-dlp · Feito para Android (Termux)</p>
+</footer>
+
+<script>
+// FAQ toggle
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    item.classList.toggle('open');
+  });
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('visible'); }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
