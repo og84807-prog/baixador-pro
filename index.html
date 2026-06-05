@@ -1,948 +1,1046 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Baixador Social Pro — Baixe vídeos de qualquer rede no celular</title>
-<meta name="description" content="Baixe vídeos ilimitados sem marca d'água do TikTok, YouTube, Instagram e +1000 sites. Atualizações gratuitas + Suporte WhatsApp + Garantia 7 dias.">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teste Cognitivo QI 130+ | Gusmao Coder Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
-:root {
-  --verde:   #00ff88;
-  --verde2:  #00cc6a;
-  --escuro:  #050a0e;
-  --card:    #0b1217;
-  --borda:   #1a2a35;
-  --texto:   #c8dde8;
-  --branco:  #eaf4fb;
-  --alerta:  #ff6b6b;
-}
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --card: #16161f;
+    --border: #2a2a3a;
+    --accent: #7c3aed;
+    --accent2: #06b6d4;
+    --gold: #f59e0b;
+    --green: #10b981;
+    --red: #ef4444;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --mono: 'Space Mono', monospace;
+    --sans: 'Syne', sans-serif;
+  }
 
-*{margin:0;padding:0;box-sizing:border-box;}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html{scroll-behavior:smooth;}
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-body{
-  background:var(--escuro);
-  color:var(--texto);
-  font-family:'Syne',sans-serif;
-  overflow-x:hidden;
-}
+  /* GRID BG */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(124,58,237,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,58,237,.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
 
-/* ── GRID DE FUNDO ── */
-body::before{
-  content:'';
-  position:fixed;inset:0;
-  background-image:
-    linear-gradient(rgba(0,255,136,.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,255,136,.03) 1px, transparent 1px);
-  background-size:40px 40px;
-  pointer-events:none;
-  z-index:0;
-}
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 20px 16px 60px;
+  }
 
-/* ── SCANLINES ── */
-body::after{
-  content:'';
-  position:fixed;inset:0;
-  background:repeating-linear-gradient(
-    0deg,
-    transparent,    transparent 2px,
-    rgba(0,0,0,.08) 2px,
-    rgba(0,0,0,.08) 4px
-  );
-  pointer-events:none;
-  z-index:0;
-}
+  /* ── TELA INTRO ── */
+  #screen-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 40px;
+    animation: fadeUp .6s ease both;
+  }
 
-section,nav,footer{position:relative;z-index:1;}
+  .logo-badge {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent2);
+    background: rgba(6,182,212,.1);
+    border: 1px solid rgba(6,182,212,.2);
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+    text-transform: uppercase;
+  }
 
-/* ── NAV ── */
-nav{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:1rem 2rem;
-  border-bottom:1px solid var(--borda);
-  background:rgba(5,10,14,.95);
-  backdrop-filter:blur(12px);
-  position:sticky;top:0;z-index:100;
-}
-.logo{
-  font-family:'JetBrains Mono',monospace;
-  font-size:1rem;
-  color:var(--verde);
-  letter-spacing:.05em;
-}
-.logo span{color:var(--branco);}
-.nav-ssl{
-  display:flex;align-items:center;gap:.4rem;
-  font-family:'JetBrains Mono',monospace;
-  font-size:.7rem;color:var(--verde);
-  background:rgba(0,255,136,.1);
-  padding:.3rem .7rem;border-radius:4px;
-  border:1px solid rgba(0,255,136,.3);
-}
+  h1 {
+    font-size: clamp(28px, 7vw, 52px);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #e2e8f0 0%, var(--accent) 60%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 
-/* ── HERO ── */
-.hero{
-  min-height:100vh;
-  display:flex;flex-direction:column;
-  justify-content:center;align-items:center;
-  text-align:center;
-  padding:6rem 1.5rem 4rem;
-  gap:1.5rem;
-}
+  .subtitle {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 40px;
+  }
 
-.badge{
-  display:inline-flex;align-items:center;gap:.5rem;
-  background:rgba(0,255,136,.08);
-  border:1px solid rgba(0,255,136,.25);
-  border-radius:999px;  padding:.4rem 1.1rem;
-  font-family:'JetBrains Mono',monospace;
-  font-size:.75rem;
-  color:var(--verde);
-  letter-spacing:.08em;
-  animation:fadeDown .6s ease both;
-}
+  .stats-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
 
-/* 🔥 CONTADOR REGRESSIVO */
-.countdown-banner{
-  background:linear-gradient(135deg, rgba(255,107,107,.15), rgba(0,255,136,.1));
-  border:1px solid rgba(255,107,107,.4);
-  border-radius:8px;
-  padding:.6rem 1.2rem;
-  display:flex;align-items:center;gap:.8rem;
-  font-family:'JetBrains Mono',monospace;
-  font-size:.8rem;
-  animation:pulse 2s infinite;
-}
-.countdown-banner .fire{font-size:1.1rem;}
-.countdown-timer{
-  color:var(--alerta);
-  font-weight:700;
-  letter-spacing:.05em;
-}
-@keyframes pulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(255,107,107,.3);}
-  50%{box-shadow:0 0 0 8px rgba(255,107,107,0);}
-}
+  .stat-chip {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 20px;
+    text-align: center;
+    min-width: 100px;
+  }
 
-.hero h1{
-  font-size:clamp(2.2rem,8vw,4.5rem);
-  font-weight:800;
-  line-height:1.05;
-  color:var(--branco);
-  max-width:800px;
-  animation:fadeUp .7s .1s ease both;
-}
-.hero h1 em{
-  font-style:normal;
-  color:var(--verde);
-  position:relative;
-}
-.hero h1 em::after{
-  content:'';
-  position:absolute;left:0;bottom:-4px;
-  width:100%;height:3px;
-  background:var(--verde);
-  border-radius:2px;
-}
-.hero-sub{
-  font-size:1.05rem;
-  color:var(--texto);
-  max-width:560px;
-  line-height:1.7;
-  animation:fadeUp .7s .2s ease both;
-}
+  .stat-chip .num {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+  }
 
-/* ✨ DESTAQUES */
-.hero-highlights{
-  display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;
-  max-width:600px;margin:0 auto;
-  animation:fadeUp .7s .25s ease both;
-}
-.highlight-tag{
-  background:rgba(0,255,136,.08);
-  border:1px solid rgba(0,255,136,.2);
-  border-radius:6px;
-  padding:.35rem .8rem;
-  font-size:.75rem;
-  color:var(--verde);
-  font-family:'JetBrains Mono',monospace;
-}
+  .stat-chip .lbl {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
 
-/* ── TERMINAL DEMO ── */
-.terminal{
-  background:#060d10;
-  border:1px solid var(--borda);
-  border-radius:12px;
-  width:100%;max-width:480px;
-  overflow:hidden;
-  box-shadow:0 0 60px rgba(0,255,136,.08), 0 20px 60px rgba(0,0,0,.6);
-  animation:fadeUp .7s .3s ease both;
-}
-.term-bar{
-  background:#0d1c24;
-  padding:.6rem 1rem;
-  display:flex;align-items:center;gap:.5rem;
-  border-bottom:1px solid var(--borda);
-}
-.dot{width:12px;height:12px;border-radius:50%;}
-.dot.r{background:#ff5f57;}
-.dot.y{background:#febc2e;}
-.dot.g{background:#28c840;}
-.term-title{
-  font-family:'JetBrains Mono',monospace;
-  font-size:.7rem;color:#4a6a7a;
-  margin-left:.5rem;
-}.term-body{
-  padding:1.2rem 1.4rem;
-  font-family:'JetBrains Mono',monospace;
-  font-size:.78rem;
-  line-height:1.9;
-}
-.tc{color:var(--verde);}
-.tw{color:var(--branco);}
-.td{color:#4a6a7a;}
-.ty{color:#febc2e;}
+  .cats-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 40px;
+    text-align: left;
+  }
 
-/* ── CTA HERO ── */
-.btn-cta{
-  display:inline-flex;align-items:center;gap:.7rem;
-  background:var(--verde);
-  color:#050a0e;
-  font-family:'Syne',sans-serif;
-  font-weight:800;
-  font-size:1.1rem;
-  padding:1rem 2.4rem;
-  border-radius:8px;
-  text-decoration:none;
-  border:none;cursor:pointer;
-  transition:transform .15s, box-shadow .15s;
-  box-shadow:0 0 30px rgba(0,255,136,.3);
-  animation:fadeUp .7s .4s ease both;
-}
-.btn-cta:hover{
-  transform:translateY(-2px);
-  box-shadow:0 0 50px rgba(0,255,136,.45);
-}
-.btn-cta .preco{
-  font-size:.8rem;font-weight:600;
-  background:rgba(0,0,0,.2);
-  padding:.2rem .6rem;border-radius:4px;
-}
+  .cats-list li {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 
-/* 👥 PROVA SOCIAL */
-.social-proof{
-  display:flex;align-items:center;gap:.5rem;
-  font-size:.8rem;color:#4a6a7a;
-  animation:fadeUp .7s .45s ease both;
-}
-.social-proof .avatar{
-  width:24px;height:24px;border-radius:50%;
-  background:var(--verde);
-  display:flex;align-items:center;justify-content:center;
-  font-size:.7rem;color:#050a0e;font-weight:700;
-}
-.social-proof .blink{  width:8px;height:8px;border-radius:50%;
-  background:var(--verde);
-  animation:blink 1.5s infinite;
-}
-@keyframes blink{50%{opacity:.3;}}
+  .cats-list li span {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
 
-.garantia-note{
-  font-size:.8rem;color:#4a6a7a;
-  display:flex;align-items:center;gap:.4rem;
-  animation:fadeUp .7s .5s ease both;
-}
+  .input-group {
+    width: 100%;
+    max-width: 360px;
+    margin-bottom: 20px;
+  }
 
-/* ── REDES ── */
-.redes-strip{
-  padding:3rem 1.5rem;
-  border-top:1px solid var(--borda);
-  border-bottom:1px solid var(--borda);
-  text-align:center;
-}
-.redes-strip p{
-  font-family:'JetBrains Mono',monospace;
-  font-size:.75rem;color:#4a6a7a;
-  letter-spacing:.1em;margin-bottom:1.5rem;
-}
-.redes-grid{
-  display:flex;flex-wrap:wrap;
-  justify-content:center;gap:.6rem;
-  max-width:600px;margin:0 auto;
-}
-.rede-tag{
-  background:var(--card);
-  border:1px solid var(--borda);
-  border-radius:6px;
-  padding:.4rem .9rem;
-  font-size:.82rem;
-  color:var(--texto);
-  transition:border-color .2s, color .2s;
-}
-.rede-tag:hover{border-color:var(--verde);color:var(--verde);}
+  .input-group label {
+    display: block;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: var(--mono);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
 
-/* ── SEÇÕES ── */
-.secao{
-  max-width:800px;margin:0 auto;
-  padding:5rem 1.5rem;
-}
-.secao-label{
-  font-family:'JetBrains Mono',monospace;
-  font-size:.72rem;color:var(--verde);
-  letter-spacing:.15em;margin-bottom:1rem;
-}.secao h2{
-  font-size:clamp(1.8rem,5vw,2.8rem);
-  font-weight:800;color:var(--branco);
-  line-height:1.15;margin-bottom:2rem;
-}
+  .input-group input {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    outline: none;
+    transition: border-color .2s;
+  }
 
-/* ── CARDS DE FUNCIONALIDADES ── */
-.features-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:1rem;
-}
-.feat-card{
-  background:var(--card);
-  border:1px solid var(--borda);
-  border-radius:12px;
-  padding:1.4rem;
-  transition:border-color .2s, transform .2s;
-}
-.feat-card:hover{
-  border-color:var(--verde);
-  transform:translateY(-3px);
-}
-.feat-icon{font-size:1.6rem;margin-bottom:.8rem;}
-.feat-card h3{
-  font-size:1rem;font-weight:700;
-  color:var(--branco);margin-bottom:.4rem;
-}
-.feat-card p{font-size:.85rem;line-height:1.6;color:#7a9aaa;}
+  .input-group input:focus {
+    border-color: var(--accent);
+  }
 
-/* ── PARA QUEM É ── */
-.pra-quem{
-  background:var(--card);
-  border:1px solid var(--borda);
-  border-radius:16px;
-  padding:2rem;
-}
-.check-item{
-  display:flex;align-items:flex-start;gap:.8rem;
-  padding:.7rem 0;
-  border-bottom:1px solid var(--borda);
-  font-size:.95rem;line-height:1.5;
-}
-.check-item:last-child{border-bottom:none;}
-.check-item .ck{color:var(--verde);font-size:1.1rem;flex-shrink:0;margin-top:.1rem;}
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), #5b21b6);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 16px 40px;
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .2s;
+    letter-spacing: .5px;
+    width: 100%;
+    max-width: 360px;
+  }
 
-/* ── O QUE INCLUI ── */
-.inclui-list{
-  display:flex;flex-direction:column;gap:.8rem;
-}.inclui-item{
-  display:flex;align-items:center;gap:1rem;
-  background:var(--card);
-  border:1px solid var(--borda);
-  border-radius:10px;
-  padding:1rem 1.2rem;
-}
-.inclui-item .num{
-  font-family:'JetBrains Mono',monospace;
-  font-size:.75rem;color:var(--verde);
-  background:rgba(0,255,136,.08);
-  border:1px solid rgba(0,255,136,.2);
-  border-radius:6px;
-  padding:.3rem .6rem;
-  flex-shrink:0;
-}
-.inclui-item p{font-size:.9rem;line-height:1.5;}
-.inclui-item p strong{color:var(--branco);}
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(124,58,237,.4);
+  }
 
-/* ── VÍDEO DEMO ── */
-.video-demo{
-  background:var(--card);
-  border:1px solid var(--borda);
-  border-radius:16px;
-  padding:2rem;
-  text-align:center;
-}
-.video-placeholder{
-  background:linear-gradient(135deg, #0d1c24, #0b1217);
-  border:2px dashed var(--borda);
-  border-radius:12px;
-  aspect-ratio:16/9;
-  display:flex;flex-direction:column;
-  justify-content:center;align-items:center;
-  gap:1rem;
-  margin-bottom:1.5rem;
-  cursor:pointer;
-  transition:border-color .2s;
-}
-.video-placeholder:hover{border-color:var(--verde);}
-.video-placeholder .play-btn{
-  width:60px;height:60px;border-radius:50%;
-  background:var(--verde);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.5rem;color:#050a0e;
-  box-shadow:0 0 30px rgba(0,255,136,.4);
-}
-.video-placeholder p{
-  font-size:.85rem;color:#4a6a7a;
-  font-family:'JetBrains Mono',monospace;}
-.video-note{
-  font-size:.8rem;color:#4a6a7a;
-  font-style:italic;
-}
+  .btn-primary:active { transform: translateY(0); }
 
-/* ── GARANTIA ── */
-.garantia-box{
-  background:linear-gradient(135deg, rgba(0,255,136,.08), rgba(0,204,106,.05));
-  border:1px solid rgba(0,255,136,.3);
-  border-radius:12px;
-  padding:1.5rem;
-  display:flex;align-items:flex-start;gap:1rem;
-  margin:2rem 0;
-}
-.garantia-icon{
-  font-size:2rem;flex-shrink:0;
-}
-.garantia-text h4{
-  color:var(--branco);font-size:1.1rem;margin-bottom:.3rem;
-}
-.garantia-text p{
-  font-size:.9rem;line-height:1.6;color:#7a9aaa;
-}
+  /* ── TELA QUESTÃO ── */
+  #screen-question { display: none; animation: fadeUp .4s ease both; }
 
-/* ── PREÇO ── */
-.preco-box{
-  background:var(--card);
-  border:2px solid var(--verde);
-  border-radius:20px;
-  padding:3rem 2rem;
-  text-align:center;
-  max-width:420px;
-  margin:0 auto;
-  box-shadow:0 0 60px rgba(0,255,136,.12);
-  position:relative;
-  overflow:hidden;
-}
-.preco-box::before{
-  content:'🔥 OFERTA LIMITADA';
-  position:absolute;top:12px;right:-35px;
-  background:var(--alerta);color:#fff;
-  font-family:'JetBrains Mono',monospace;
-  font-size:.65rem;font-weight:700;
-  padding:.3rem 3rem;
-  transform:rotate(45deg);
-}
-.preco-de{
-  font-size:.9rem;color:#4a6a7a;
-  text-decoration:line-through;  margin-bottom:.3rem;
-}
-.preco-por{
-  font-size:3.5rem;font-weight:800;
-  color:var(--verde);line-height:1;
-  margin-bottom:.5rem;
-}
-.preco-por span{font-size:1.5rem;}
-.preco-desc{font-size:.85rem;color:#4a6a7a;margin-bottom:2rem;}
-.btn-cta-big{
-  display:block;
-  background:var(--verde);
-  color:#050a0e;
-  font-family:'Syne',sans-serif;
-  font-weight:800;
-  font-size:1.15rem;
-  padding:1.1rem 2rem;
-  border-radius:10px;
-  text-decoration:none;
-  text-align:center;
-  margin-bottom:1.2rem;
-  transition:transform .15s,box-shadow .15s;
-  box-shadow:0 0 30px rgba(0,255,136,.25);
-}
-.btn-cta-big:hover{
-  transform:translateY(-2px);
-  box-shadow:0 0 50px rgba(0,255,136,.4);
-}
-.garantia-mini{
-  display:flex;align-items:center;gap:.5rem;
-  justify-content:center;
-  font-size:.8rem;color:#4a6a7a;
-}
+  .progress-bar-wrap {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    height: 6px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
 
-/* ── CONTATO ── */
-.contato-box{
-  background:var(--card);
-  border:1px solid var(--borda);
-  border-radius:16px;
-  padding:2rem;
-  text-align:center;
-}
-.contato-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:1rem;margin-top:1.5rem;
-}
-.contato-item{
-  display:flex;align-items:center;gap:.8rem;
-  justify-content:center;
-  padding:1rem;  background:rgba(0,255,136,.05);
-  border:1px solid rgba(0,255,136,.2);
-  border-radius:10px;
-  text-decoration:none;
-  color:var(--texto);
-  transition:border-color .2s, transform .2s;
-}
-.contato-item:hover{
-  border-color:var(--verde);
-  transform:translateY(-2px);
-}
-.contato-item .icon{font-size:1.3rem;}
-.contato-item span{font-size:.9rem;font-weight:600;}
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 100px;
+    transition: width .4s ease;
+  }
 
-/* ── FAQ ── */
-.faq-list{display:flex;flex-direction:column;gap:.8rem;}
-.faq-item{
-  background:var(--card);
-  border:1px solid var(--borda);
-  border-radius:10px;
-  overflow:hidden;
-}
-.faq-q{
-  width:100%;background:none;border:none;
-  color:var(--branco);
-  font-family:'Syne',sans-serif;
-  font-size:.95rem;font-weight:700;
-  padding:1.1rem 1.3rem;
-  text-align:left;cursor:pointer;
-  display:flex;justify-content:space-between;align-items:center;
-  gap:1rem;
-}
-.faq-q .arr{color:var(--verde);font-size:1rem;transition:transform .2s;flex-shrink:0;}
-.faq-item.open .arr{transform:rotate(180deg);}
-.faq-a{
-  display:none;
-  padding:0 1.3rem 1.1rem;
-  font-size:.88rem;line-height:1.7;
-  color:#7a9aaa;
-}
-.faq-item.open .faq-a{display:block;}
+  .q-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
 
-/* ── FOOTER ── */
-footer{
-  border-top:1px solid var(--borda);
-  padding:2.5rem 1.5rem;
-  text-align:center;
-  font-family:'JetBrains Mono',monospace;
-  font-size:.75rem;
-  color:#2a4a5a;}
-footer a{color:var(--verde);text-decoration:none;}
+  .q-num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
 
-/* ── ANIMAÇÕES ── */
-@keyframes fadeDown{
-  from{opacity:0;transform:translateY(-15px);}
-  to{opacity:1;transform:translateY(0);}
-}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(20px);}
-  to{opacity:1;transform:translateY(0);}
-}
+  .cat-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent2);
+    background: rgba(6,182,212,.1);
+    border: 1px solid rgba(6,182,212,.15);
+    padding: 4px 10px;
+    border-radius: 100px;
+  }
 
-/* ── SCROLL REVEAL ── */
-.reveal{
-  opacity:0;transform:translateY(30px);
-  transition:opacity .6s ease, transform .6s ease;
-}
-.reveal.visible{opacity:1;transform:translateY(0);}
+  .score-live {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
 
-/* ── DIVISOR ── */
-.div-verde{
-  width:60px;height:3px;
-  background:var(--verde);
-  border-radius:2px;
-  margin:0 auto 3rem;
-}
+  .score-chip {
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 100px;
+    border: 1px solid;
+  }
 
-/* ── RESPONSIVO ── */
-@media(max-width:600px){
-  .hero h1{font-size:clamp(2rem,7vw,3.5rem);}
-  .preco-por{font-size:3rem;}
-  .btn-cta, .btn-cta-big{width:100%;justify-content:center;}
-}
+  .score-chip.ok { color: var(--green); border-color: rgba(16,185,129,.3); background: rgba(16,185,129,.08); }
+  .score-chip.err { color: var(--red); border-color: rgba(239,68,68,.3); background: rgba(239,68,68,.08); }
+
+  .q-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px 24px;
+    margin-bottom: 16px;
+  }
+
+  .q-text {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.6;
+    white-space: pre-line;
+  }
+
+  .options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .opt-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 20px;
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+    transition: all .15s;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .opt-btn:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: rgba(124,58,237,.08);
+    transform: translateX(4px);
+  }
+
+  .opt-btn .letter {
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .opt-btn.correct {
+    border-color: var(--green);
+    background: rgba(16,185,129,.1);
+  }
+
+  .opt-btn.correct .letter {
+    background: var(--green);
+    color: white;
+    border-color: var(--green);
+  }
+
+  .opt-btn.wrong {
+    border-color: var(--red);
+    background: rgba(239,68,68,.08);
+  }
+
+  .opt-btn.wrong .letter {
+    background: var(--red);
+    color: white;
+    border-color: var(--red);
+  }
+
+  .opt-btn:disabled { cursor: default; }
+
+  /* FEEDBACK */
+  .feedback-box {
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    display: none;
+    animation: fadeUp .3s ease both;
+  }
+
+  .feedback-box.show { display: block; }
+
+  .feedback-box.correct-fb {
+    background: rgba(16,185,129,.08);
+    border: 1px solid rgba(16,185,129,.25);
+  }
+
+  .feedback-box.wrong-fb {
+    background: rgba(239,68,68,.06);
+    border: 1px solid rgba(239,68,68,.2);
+  }
+
+  .feedback-title {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .feedback-box.correct-fb .feedback-title { color: var(--green); }
+  .feedback-box.wrong-fb .feedback-title { color: var(--red); }
+
+  .feedback-exp {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .btn-next {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 24px;
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .2s;
+    width: 100%;
+    display: none;
+  }
+
+  .btn-next.show { display: block; }
+
+  .btn-next:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* ── TELA RESULTADO ── */
+  #screen-result { display: none; animation: fadeUp .5s ease both; }
+
+  .result-hero {
+    text-align: center;
+    padding: 40px 0 32px;
+  }
+
+  .result-score {
+    font-family: var(--mono);
+    font-size: clamp(52px, 15vw, 88px);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .result-label {
+    font-size: 13px;
+    color: var(--muted);
+    font-family: var(--mono);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .result-nivel {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 28px;
+    border-radius: 100px;
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: .5px;
+  }
+
+  .nivel-exc  { background: rgba(16,185,129,.15); color: var(--green); border: 1px solid rgba(16,185,129,.3); }
+  .nivel-alto { background: rgba(124,58,237,.15); color: #a78bfa; border: 1px solid rgba(124,58,237,.3); }
+  .nivel-acima{ background: rgba(245,158,11,.12); color: var(--gold); border: 1px solid rgba(245,158,11,.3); }
+  .nivel-med  { background: rgba(6,182,212,.1); color: var(--accent2); border: 1px solid rgba(6,182,212,.2); }
+  .nivel-dev  { background: rgba(239,68,68,.08); color: var(--red); border: 1px solid rgba(239,68,68,.2); }
+
+  .result-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .r-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 12px;
+    text-align: center;
+  }
+
+  .r-card .val {
+    font-family: var(--mono);
+    font-size: 28px;
+    font-weight: 700;
+    display: block;
+  }
+
+  .r-card .lbl {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .r-card.green .val { color: var(--green); }
+  .r-card.red .val   { color: var(--red); }
+  .r-card.blue .val  { color: var(--accent2); }
+
+  /* Categorias */
+  .section-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .cat-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .cat-name {
+    font-size: 12px;
+    color: var(--muted);
+    width: 180px;
+    flex-shrink: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .cat-bar-wrap {
+    flex: 1;
+    background: var(--surface);
+    border-radius: 100px;
+    height: 6px;
+    overflow: hidden;
+  }
+
+  .cat-bar-fill {
+    height: 100%;
+    border-radius: 100px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: width 1s ease;
+  }
+
+  .cat-score {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    width: 28px;
+    text-align: right;
+  }
+
+  /* Erradas */
+  .wrong-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+
+  .wrong-item {
+    background: var(--card);
+    border: 1px solid rgba(239,68,68,.2);
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .wrong-item .q-info {
+    font-size: 13px;
+    color: var(--muted);
+    flex: 1;
+  }
+
+  .wrong-item .q-info strong {
+    color: var(--text);
+    display: block;
+    margin-bottom: 2px;
+    font-size: 12px;
+  }
+
+  .wrong-resp {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .resp-chip {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+
+  .resp-chip.sua { background: rgba(239,68,68,.15); color: var(--red); }
+  .resp-chip.certa { background: rgba(16,185,129,.15); color: var(--green); }
+
+  .btn-restart {
+    background: linear-gradient(135deg, var(--accent), #5b21b6);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 16px 40px;
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .2s;
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  .btn-restart:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(124,58,237,.4);
+  }
+
+  .footer-tag {
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 40px;
+    letter-spacing: 1px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 480px) {
+    .cats-list { grid-template-columns: 1fr; }
+    .result-cards { grid-template-columns: 1fr 1fr 1fr; }
+    .cat-name { width: 110px; font-size: 11px; }
+  }
 </style>
 </head>
 <body>
+<div class="container">
 
-<nav>
-  <div class="logo">$ <span>baixador</span>_social_pro<span style="color:var(--verde)">█</span></div>
-  <div class="nav-ssl">🔒 HTTPS Ativo</div>
-</nav>
+  <!-- ══ INTRO ══ -->
+  <div id="screen-intro">
+    <div class="logo-badge">GUSMAO CODER TOOLS</div>
+    <h1>Teste Cognitivo<br>QI 130+</h1>
+    <p class="subtitle">// avaliacao_cognitiva_avancada_v1.0</p>
 
-<section class="hero">
-  <div class="badge">🎬 FUNCIONA 100% NO ANDROID</div>
-
-  <!-- 🔥 CONTADOR REGRESSIVO -->
-  <div class="countdown-banner">
-    <span class="fire">🔥</span>
-    <span>Oferta termina em:</span>    <span class="countdown-timer" id="countdown">23:59:59</span>
-  </div>
-
-  <h1>Baixe vídeos <em>ilimitados sem marca d'água</em> direto no seu celular</h1>
-
-  <p class="hero-sub">
-    Programa completo com menu no terminal. Instale no Termux, cole o link e pronto —
-    TikTok, YouTube, Instagram, Facebook e mais de <strong style="color:var(--branco)">1000 sites</strong> suportados.
-  </p>
-
-  <!-- ✨ DESTAQUES -->
-  <div class="hero-highlights">
-    <span class="highlight-tag">✓ Vídeos ilimitados</span>
-    <span class="highlight-tag">✓ Sem marca d'água</span>
-    <span class="highlight-tag">✓ Atualizações gratuitas</span>
-    <span class="highlight-tag">✓ Suporte WhatsApp</span>
-  </div>
-
-  <div class="terminal">
-    <div class="term-bar">
-      <div class="dot r"></div>
-      <div class="dot y"></div>
-      <div class="dot g"></div>
-      <span class="term-title">termux — baixador.py</span>
+    <div class="stats-row">
+      <div class="stat-chip"><span class="num">20</span><span class="lbl">Questões</span></div>
+      <div class="stat-chip"><span class="num">6</span><span class="lbl">Categorias</span></div>
+      <div class="stat-chip"><span class="num">40</span><span class="lbl">Min suger.</span></div>
+      <div class="stat-chip"><span class="num">100</span><span class="lbl">Pts máx.</span></div>
     </div>
-    <div class="term-body">
-      <div><span class="tc">╔══════════════════════════════════════╗</span></div>
-      <div><span class="tc">║  🎬  BAIXADOR SOCIAL PRO  v1.1       ║</span></div>
-      <div><span class="tc">╚══════════════════════════════════════╝</span></div>
-      <div> </div>
-      <div><span class="tw">[1]</span> <span class="td">📥 Baixar vídeo / áudio</span></div>
-      <div><span class="tw">[2]</span> <span class="td">📋 Redes sociais suportadas</span></div>
-      <div><span class="tw">[3]</span> <span class="td">🔧 Ferramentas e atualização</span></div>
-      <div><span class="tw">[4]</span> <span class="td">📜 Histórico de downloads</span></div>
-      <div> </div>
-      <div><span class="ty">Escolha uma opção: </span><span class="tc">1</span></div>
-      <div> </div>
-      <div><span class="td">Cole o link aqui: </span><span class="tw">https://tiktok.com/...</span></div>
-      <div> </div>
-      <div><span class="tc">✓ Download concluído!</span></div>
-      <div><span class="td">📂 Salvo em: Downloads/BaixadorSocialPro/TikTok/</span></div>
+
+    <ul class="cats-list">
+      <li><span></span>Lógica e Padrões</li>
+      <li><span></span>Raciocínio Abstrato</li>
+      <li><span></span>Linguagem</li>
+      <li><span></span>Intel. Emocional</li>
+      <li><span></span>Matemática Avançada</li>
+      <li><span></span>Percepção Criativa</li>
+    </ul>
+
+    <div class="input-group">
+      <label>Seu nome</label>
+      <input type="text" id="nome-input" placeholder="Digite seu nome..." maxlength="30">
     </div>
+    <button class="btn-primary" onclick="iniciarTeste()">Iniciar Teste →</button>
   </div>
 
-  <a href="https://pay.kiwify.com.br/GHClPOs" class="btn-cta">
-    ⚡ QUERO BAIXAR AGORA
-    <span class="preco">R$ 37</span>
-  </a>
+  <!-- ══ QUESTÃO ══ -->
+  <div id="screen-question">
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+    </div>
 
-  <!-- 👥 PROVA SOCIAL DINÂMICA -->  <div class="social-proof">
-    <span class="blink"></span>
-    <span class="avatar">J</span>
-    <span><strong id="social-name">João de São Paulo</strong> comprou há <strong id="social-time">23 horas</strong></span>
+    <div class="q-meta">
+      <span class="q-num" id="q-num">Questão 1 / 20</span>
+      <span class="cat-tag" id="cat-tag">CATEGORIA</span>
+    </div>
+
+    <div class="score-live">
+      <span class="score-chip ok" id="chip-ok">✔ 0 acertos</span>
+      <span class="score-chip err" id="chip-err">✘ 0 erros</span>
+    </div>
+
+    <div class="q-card">
+      <p class="q-text" id="q-text"></p>
+    </div>
+
+    <div class="options-grid" id="options-grid"></div>
+
+    <div class="feedback-box" id="feedback-box">
+      <div class="feedback-title" id="feedback-title"></div>
+      <div class="feedback-exp" id="feedback-exp"></div>
+    </div>
+
+    <button class="btn-next" id="btn-next" onclick="proximaQuestao()">
+      Próxima questão →
+    </button>
   </div>
 
-  <p class="garantia-note">🔒 Pagamento seguro · Entrega imediata · <strong style="color:var(--verde)">Garantia de 7 dias</strong></p>
-</section>
+  <!-- ══ RESULTADO ══ -->
+  <div id="screen-result">
+    <div class="result-hero">
+      <div class="result-score" id="res-score" style="color: var(--accent)"></div>
+      <div class="result-label">pontos de 100</div>
+      <div class="result-nivel" id="res-nivel"></div>
+    </div>
 
-<div class="redes-strip">
-  <p>// REDES SUPORTADAS</p>
-  <div class="redes-grid">
-    <span class="rede-tag">🎵 TikTok</span>
-    <span class="rede-tag">▶️ YouTube</span>
-    <span class="rede-tag">📸 Instagram</span>
-    <span class="rede-tag">🐦 Twitter / X</span>
-    <span class="rede-tag">👤 Facebook</span>
-    <span class="rede-tag">📌 Pinterest</span>
-    <span class="rede-tag">📹 Kwai</span>
-    <span class="rede-tag">🎮 Twitch</span>
-    <span class="rede-tag">🎧 SoundCloud</span>
-    <span class="rede-tag">📺 Rumble</span>
-    <span class="rede-tag">🧵 Threads</span>
-    <span class="rede-tag">🌐 +1000 sites</span>
+    <div class="result-cards">
+      <div class="r-card green">
+        <span class="val" id="res-acertos">0</span>
+        <span class="lbl">Acertos</span>
+      </div>
+      <div class="r-card red">
+        <span class="val" id="res-erros">0</span>
+        <span class="lbl">Erros</span>
+      </div>
+      <div class="r-card blue">
+        <span class="val" id="res-pct">0%</span>
+        <span class="lbl">Aproveit.</span>
+      </div>
+    </div>
+
+    <p class="section-title">Desempenho por categoria</p>
+    <div id="cats-result" style="margin-bottom:28px"></div>
+
+    <div id="wrong-section" style="display:none">
+      <p class="section-title">Questões que você errou</p>
+      <div class="wrong-list" id="wrong-list"></div>
+    </div>
+
+    <button class="btn-restart" onclick="reiniciar()">Fazer novamente ↺</button>
+
+    <div class="footer-tag">GUSMAO CODER TOOLS · @termux_automacao</div>
   </div>
+
 </div>
 
-<section class="secao reveal">
-  <div class="secao-label">// O QUE O PROGRAMA FAZ</div>
-  <h2>Tudo que você precisa em um só lugar</h2>
-  <div class="div-verde"></div>
-  <div class="features-grid">
-    <div class="feat-card">
-      <div class="feat-icon">📥</div>
-      <h3>Download com 1 link</h3>
-      <p>Cole o link, escolha o formato e o vídeo vai direto pro seu celular.</p>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon">✨</div>
-      <h3>Sem marca d'água</h3>
-      <p>Baixe vídeos do TikTok, Kwai e outras redes sem logotipos ou marcas.</p>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon">🔄</div>
-      <h3>Atualizações gratuitas</h3>
-      <p>Receba melhorias e novas funcionalidades sem pagar nada a mais.</p>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon">🎵</div>
-      <h3>Vídeo ou áudio</h3>      <p>Baixe em MP4 (até 1080p) ou extraia só o áudio em MP3 ou M4A.</p>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon">💬</div>
-      <h3>Suporte WhatsApp</h3>
-      <p>Dúvidas? Fale direto comigo pelo WhatsApp com resposta rápida.</p>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon">🛡️</div>
-      <h3>Garantia 7 dias</h3>
-      <p>Não gostou? Devolvo 100% do seu dinheiro, sem perguntas.</p>
-    </div>
-  </div>
-</section>
-
-<!-- 🎬 SEÇÃO DE VÍDEO DEMONSTRATIVO -->
-<section class="secao reveal" style="padding-top:0;">
-  <div class="secao-label">// VEJA FUNCIONANDO</div>
-  <h2>Assista ao programa em ação</h2>
-  <div class="div-verde"></div>
-  <div class="video-demo">
-    <div class="video-placeholder" onclick="abrirVideo()">
-      <div class="play-btn">▶</div>
-      <p>Clique para assistir a demonstração (2min)</p>
-    </div>
-    <p class="video-note">📹 Vídeo hospedado no YouTube • Sem necessidade de cadastro</p>
-    
-    <!-- Substitua pelo seu link real do YouTube -->
-    <div id="video-container" style="display:none;margin-top:1rem;">
-      <iframe width="100%" height="315" 
-        src="https://www.youtube.com/embed/SEU_VIDEO_ID?autoplay=1" 
-        title="Demonstração Baixador Social Pro" 
-        frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen
-        style="border-radius:12px;">
-      </iframe>
-    </div>
-  </div>
-</section>
-
-<section class="secao reveal" style="padding-top:0;">
-  <div class="secao-label">// PARA QUEM É</div>
-  <h2>Este produto é pra você se…</h2>
-  <div class="div-verde"></div>
-  <div class="pra-quem">
-    <div class="check-item"><span class="ck">✓</span><span>Quer baixar vídeos do TikTok, YouTube ou Instagram sem aplicativo cheio de anúncio</span></div>
-    <div class="check-item"><span class="ck">✓</span><span>Nunca programou nada e quer algo simples de usar</span></div>
-    <div class="check-item"><span class="ck">✓</span><span>Quer salvar músicas do YouTube em MP3 no celular</span></div>
-    <div class="check-item"><span class="ck">✓</span><span>Está aprendendo a usar o Termux e quer uma ferramenta prática</span></div>    <div class="check-item"><span class="ck">✓</span><span>Não quer pagar mensalidade de app — paga uma vez e usa pra sempre</span></div>
-    <div class="check-item"><span class="ck">✓</span><span>Quer ter os arquivos salvos no próprio celular, sem depender de nuvem</span></div>
-  </div>
-</section>
-
-<!-- 🛡️ GARANTIA DESTACADA -->
-<section class="secao reveal" style="padding-top:0;">
-  <div class="secao-label">// SUA TRANQUILIDADE</div>
-  <h2>Compra 100% segura e sem risco</h2>
-  <div class="div-verde"></div>
-  
-  <div class="garantia-box">
-    <div class="garantia-icon">🛡️</div>
-    <div class="garantia-text">
-      <h4>Garantia Incondicional de 7 Dias</h4>
-      <p>Se por qualquer motivo você não ficar satisfeito com o Baixador Social Pro, basta me enviar uma mensagem em até 7 dias após a compra que devolvo 100% do seu dinheiro. Sem burocracia, sem perguntas. Seu risco é zero.</p>
-    </div>
-  </div>
-  
-  <p style="text-align:center;font-size:.85rem;color:#4a6a7a;">
-    ✅ Pagamento processado pela Kiwify (plataforma segura) • ✅ Seus dados protegidos • ✅ Suporte humano real
-  </p>
-</section>
-
-<section class="secao reveal" style="padding-top:0;">
-  <div class="secao-label">// O QUE VOCÊ RECEBE</div>
-  <h2>Tudo incluso no pack</h2>
-  <div class="div-verde"></div>
-  <div class="inclui-list">
-    <div class="inclui-item">
-      <span class="num">01</span>
-      <p><strong>baixador.py</strong> — programa principal com menu completo no terminal</p>
-    </div>
-    <div class="inclui-item">
-      <span class="num">02</span>
-      <p><strong>instalar.sh</strong> — instalador automático, configura tudo em minutos</p>
-    </div>
-    <div class="inclui-item">
-      <span class="num">03</span>
-      <p><strong>LEIA_PRIMEIRO.txt</strong> — guia passo a passo pra iniciante absoluto</p>
-    </div>
-    <div class="inclui-item">
-      <span class="num">04</span>
-      <p><strong>Suporte via WhatsApp</strong> — atendimento personalizado para tirar suas dúvidas</p>
-    </div>
-    <div class="inclui-item">
-      <span class="num">05</span>
-      <p><strong>Atualizações vitalícias</strong> — receba novas versões e melhorias sem custo adicional</p>
-    </div>
-  </div></section>
-
-<!-- 💬 CONTATO -->
-<section class="secao reveal" style="padding-top:0;">
-  <div class="secao-label">// PRECISA DE AJUDA?</div>
-  <h2>Fale comigo diretamente</h2>
-  <div class="div-verde"></div>
-  <div class="contato-box">
-    <p style="color:#7a9aaa;margin-bottom:1rem;">Estou disponível para te ajudar antes e depois da compra:</p>
-    <div class="contato-grid">
-      <a href="https://wa.me/55SEUNUMERO" class="contato-item" target="_blank">
-        <span class="icon">💬</span>
-        <span>WhatsApp</span>
-      </a>
-      <a href="mailto:seuemail@dominio.com" class="contato-item">
-        <span class="icon">📧</span>
-        <span>E-mail</span>
-      </a>
-    </div>
-    <p style="font-size:.8rem;color:#4a6a7a;margin-top:1rem;">
-      ⏰ Atendimento: Seg-Sex, 9h às 18h • Resposta em até 2 horas
-    </p>
-  </div>
-</section>
-
-<section class="secao reveal" style="padding-top:0;text-align:center;">
-  <div class="secao-label" style="text-align:center;">// INVESTIMENTO</div>
-  <h2>Acesso vitalício por apenas</h2>
-  <div class="div-verde"></div>
-  <div class="preco-box">
-    <p class="preco-de">De R$ 97</p>
-    <p class="preco-por"><span>R$</span> 37</p>
-    <p class="preco-desc">pagamento único · sem mensalidade</p>
-    <a href="https://pay.kiwify.com.br/GHClPOs" class="btn-cta-big">⚡ COMPRAR AGORA</a>
-    <div class="garantia-mini">
-      🔒 Kiwify • 🛡️ 7 dias de garantia • 🔄 Atualizações grátis
-    </div>
-  </div>
-</section>
-
-<section class="secao reveal" style="padding-top:0;">
-  <div class="secao-label">// DÚVIDAS FREQUENTES</div>
-  <h2>Perguntas e respostas</h2>
-  <div class="div-verde"></div>
-  <div class="faq-list">
-    <div class="faq-item">
-      <button class="faq-q">Precisa saber programar pra usar? <span class="arr">▼</span></button>
-      <div class="faq-a">Não! O programa tem menu com números. Você só digita a opção, cola o link e pronto. O guia incluso explica tudo passo a passo.</div>
-    </div>
-    <div class="faq-item">      <button class="faq-q">Funciona em qual versão do Android? <span class="arr">▼</span></button>
-      <div class="faq-a">Funciona no Android 7 ou superior com o Termux instalado. Testado no Android 12 e 13.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q">Funciona no iPhone? <span class="arr">▼</span></button>
-      <div class="faq-a">Este produto foi desenvolvido especificamente para Android via Termux. No iPhone não é suportado.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q">Como recebo o produto após a compra? <span class="arr">▼</span></button>
-      <div class="faq-a">Imediatamente após o pagamento você recebe o link de download no e-mail. O arquivo .zip com tudo incluso.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q">Os vídeos ficam sem marca d'água? <span class="arr">▼</span></button>
-      <div class="faq-a">Sim! O programa remove automaticamente marcas d'água do TikTok, Kwai e outras redes que permitem.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q">E se eu não gostar? <span class="arr">▼</span></button>
-      <div class="faq-a">Você tem 7 dias de garantia total. Basta me chamar no WhatsApp ou e-mail que devolvo 100% do seu dinheiro, sem perguntas.</div>
-    </div>
-  </div>
-</section>
-
-<section class="secao reveal" style="text-align:center;padding-top:0;">
-  <h2 style="margin-bottom:1rem;">Pronto pra começar?</h2>
-  <p style="color:#7a9aaa;margin-bottom:2rem;font-size:.95rem;">Baixe agora e instale em menos de 5 minutos.</p>
-  <a href="https://pay.kiwify.com.br/GHClPOs" class="btn-cta" style="display:inline-flex;">
-    ⚡ QUERO O BAIXADOR SOCIAL PRO
-    <span class="preco">R$ 37</span>
-  </a>
-  <p style="margin-top:1rem;font-size:.8rem;color:#2a4a5a;">🔒 Pagamento seguro · Entrega imediata · 🛡️ Garantia 7 dias</p>
-</section>
-
-<footer>
-  <p>© 2026 Baixador Social Pro · Todos os direitos reservados</p>
-  <p style="margin-top:.5rem;">Desenvolvido com Python + yt-dlp · Feito para Android (Termux)</p>
-  <p style="margin-top:.8rem;">
-    <a href="https://wa.me/55SEUNUMERO">💬 WhatsApp</a> • 
-    <a href="mailto:seuemail@dominio.com">📧 E-mail</a>
-  </p>
-</footer>
-
 <script>
-// 🔥 CONTADOR REGRESSIVO (24h a partir do primeiro acesso)
-function iniciarContador(){
-  const now = new Date().getTime();
-  let endTime = localStorage.getItem('bsp_endTime');
-  
-  if(!endTime){
-    endTime = now + (24 * 60 * 60 * 1000); // 24 horas
-    localStorage.setItem('bsp_endTime', endTime);  }
-  
-  const interval = setInterval(() => {
-    const now = new Date().getTime();
-    const distance = endTime - now;
-    
-    if(distance < 0){
-      clearInterval(interval);
-      document.getElementById('countdown').innerHTML = 'EXPIRADO';
-      return;
-    }
-    
-    const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const s = Math.floor((distance % (1000 * 60)) / 1000);
-    
-    document.getElementById('countdown').innerHTML = 
-      `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-  }, 1000);
-}
-iniciarContador();
-
-// 👥 PROVA SOCIAL DINÂMICA (nomes e tempos aleatórios)
-const nomes = [
-  'João de São Paulo', 'Maria do Rio', 'Carlos de BH', 
-  'Ana de Curitiba', 'Pedro de Recife', 'Juliana de Porto Alegre',
-  'Rafael de Salvador', 'Camila de Brasília', 'Lucas de Fortaleza'
+const questoes = [
+  {
+    cat: "LÓGICA E PADRÕES",
+    q: "Qual número completa a sequência?\n\n   2  →  3  →  5  →  8  →  13  →  21  →  ___",
+    ops: ["A) 30","B) 33","C) 34","D) 36"],
+    resp: "C",
+    exp: "Sequência de Fibonacci: cada número é a soma dos dois anteriores.\n13 + 21 = 34 ✓"
+  },
+  {
+    cat: "LÓGICA E PADRÕES",
+    q: "TODOS os músicos são artistas.\nALGUNS artistas são introvertidos.\n\nQual afirmação é necessariamente verdadeira?",
+    ops: ["A) Todos os músicos são introvertidos","B) Alguns músicos podem ser introvertidos","C) Nenhum músico é introvertido","D) Todos os introvertidos são artistas"],
+    resp: "B",
+    exp: "Só sabemos que ALGUNS artistas são introvertidos. Isso inclui a possibilidade, não a certeza para os músicos."
+  },
+  {
+    cat: "LÓGICA E PADRÕES",
+    q: "Complete a analogia:\n\nSilêncio  :  Barulho  =  Ignorância  :  ___",
+    ops: ["A) Estudo","B) Conhecimento","C) Sabedoria","D) Inteligência"],
+    resp: "B",
+    exp: "Silêncio é a ausência de barulho. Da mesma forma, Ignorância é a ausência de Conhecimento."
+  },
+  {
+    cat: "LÓGICA E PADRÕES",
+    q: "Padrão de formas:\n\nLinha 1:  ○  △  □\nLinha 2:  △  □  ○\nLinha 3:  □  ○  ___",
+    ops: ["A) □  Quadrado","B) ○  Círculo","C) △  Triângulo","D) ◇  Losango"],
+    resp: "C",
+    exp: "Cada linha é uma rotação cíclica das três formas. A forma ausente na linha 3 é o Triângulo."
+  },
+  {
+    cat: "RACIOCÍNIO ABSTRATO",
+    q: "Um homem olha para uma foto e diz:\n\n\"Irmãos e irmãs não tenho, mas o pai\ndesse homem é filho do meu pai.\"\n\nDe quem é a foto?",
+    ops: ["A) Seu pai","B) Ele mesmo","C) Seu filho","D) Seu sobrinho"],
+    resp: "C",
+    exp: "O pai da pessoa na foto é filho do MEU pai → o pai da foto sou EU. Logo, a foto é do meu FILHO."
+  },
+  {
+    cat: "RACIOCÍNIO ABSTRATO",
+    q: "Qual palavra NÃO pertence ao grupo?\n\n   Marte  ·  Vênus  ·  Lua  ·  Saturno  ·  Júpiter",
+    ops: ["A) Marte","B) Vênus","C) Lua","D) Saturno"],
+    resp: "C",
+    exp: "Todos os outros são planetas do Sistema Solar. A Lua é um satélite natural da Terra."
+  },
+  {
+    cat: "RACIOCÍNIO ABSTRATO",
+    q: "3 caixas: [Laranjas] [Maçãs] [Laranjas+Maçãs]\nTodas as etiquetas estão ERRADAS.\nVocê pode tirar apenas 1 fruta de 1 caixa.\n\nDe qual caixa para identificar todas?",
+    ops: ["A) Da caixa [Laranjas]","B) Da caixa [Maçãs]","C) Da caixa [Laranjas+Maçãs]","D) Qualquer uma — tanto faz"],
+    resp: "C",
+    exp: "Como todas estão erradas, a caixa [Laranjas+Maçãs] contém apenas UM tipo. A fruta retirada revela o conteúdo e por eliminação as outras se resolvem."
+  },
+  {
+    cat: "RACIOCÍNIO ABSTRATO",
+    q: "Invertendo o alfabeto (A↔Z, B↔Y, C↔X...)\n\nQual letra ficaria na posição atual do M (13ª)?",
+    ops: ["A) L","B) M","C) N","D) O"],
+    resp: "C",
+    exp: "Posição invertida = 26 − 13 + 1 = 14ª posição original = letra N."
+  },
+  {
+    cat: "LINGUAGEM",
+    q: "Qual palavra tem relação de HIPONÍMIA\ncom a palavra 'veículo'?",
+    ops: ["A) Transporte","B) Automóvel","C) Deslocamento","D) Motor"],
+    resp: "B",
+    exp: "Hiponímia = relação de subordinação. 'Automóvel' é um tipo específico de veículo — é hipônimo de 'veículo'."
+  },
+  {
+    cat: "LINGUAGEM",
+    q: "\"O silêncio gritou mais alto\nque qualquer palavra.\"\n\nEssa frase é um exemplo de:",
+    ops: ["A) Pleonasmo","B) Oxímoro","C) Eufemismo","D) Metonímia"],
+    resp: "B",
+    exp: "Oxímoro combina termos contraditórios numa mesma ideia: silêncio que GRITA."
+  },
+  {
+    cat: "LINGUAGEM",
+    q: "Uma pessoa PROLÍFICA é aquela que:",
+    ops: ["A) Fala muito sem fundamento","B) Produz obras em grande quantidade","C) Tem dificuldade de concentração","D) É extremamente detalhista"],
+    resp: "B",
+    exp: "Do latim 'proles' (descendência) + 'facere' (fazer). Significa fértil, muito produtivo em obras ou resultados."
+  },
+  {
+    cat: "INTEL. EMOCIONAL",
+    q: "Você deve escolher:\nsalvar 1 pessoa amada  OU  5 desconhecidos.\n\nQual raciocínio representa melhor uma mente de QI elevado?",
+    ops: ["A) Salvar os 5 — o número importa mais","B) Salvar o ente querido — emoção é humana","C) Reconhecer que não existe resposta certa","D) Paralisar — qualquer escolha é errada"],
+    resp: "C",
+    exp: "Mentes de alto QI reconhecem dilemas sem solução objetiva. Tolerância à ambiguidade é traço cognitivo de inteligência elevada."
+  },
+  {
+    cat: "INTEL. EMOCIONAL",
+    q: "Qual afirmação descreve melhor\no conceito de 'METACOGNIÇÃO'?",
+    ops: ["A) Memorizar muitas informações","B) Pensar sobre o próprio processo de pensar","C) Rapidez no raciocínio lógico","D) Inteligência emocional elevada"],
+    resp: "B",
+    exp: "Metacognição = consciência e regulação dos próprios processos cognitivos. Habilidade central em QI 130+."
+  },
+  {
+    cat: "MATEMÁTICA",
+    q: "Qual é o próximo número da sequência?\n\n   1  ·  4  ·  9  ·  16  ·  25  ·  ___",
+    ops: ["A) 30","B) 36","C) 35","D) 49"],
+    resp: "B",
+    exp: "São os quadrados perfeitos: 1² · 2² · 3² · 4² · 5² · 6² = 36."
+  },
+  {
+    cat: "MATEMÁTICA",
+    q: "Um produto tem 20% de desconto,\ndepois mais 10% de desconto.\n\nQual é o desconto TOTAL real?",
+    ops: ["A) 30%","B) 28%","C) 27%","D) 25%"],
+    resp: "B",
+    exp: "0,80 × 0,90 = 0,72 → desconto real de 28%, não 30%. Descontos sucessivos não se somam linearmente."
+  },
+  {
+    cat: "MATEMÁTICA",
+    q: "Quantos zeros tem o resultado de\n100! (fatorial de 100) no final?",
+    ops: ["A) 20","B) 24","C) 25","D) 100"],
+    resp: "B",
+    exp: "Zeros finais = fatores de 5 em 100!:\n⌊100/5⌋ + ⌊100/25⌋ = 20 + 4 = 24 zeros."
+  },
+  {
+    cat: "MATEMÁTICA",
+    q: "Se você dobrar um papel 42 vezes,\nqual seria a espessura aproximada?",
+    ops: ["A) Alguns metros","B) Da Terra à Lua","C) Da Terra ao Sol","D) Além do Sistema Solar"],
+    resp: "B",
+    exp: "Crescimento exponencial: 2⁴² × 0,1mm ≈ 439.000 km. Distância Terra-Lua ≈ 384.000 km. As 42 dobras ultrapassam a Lua!"
+  },
+  {
+    cat: "PERCEPÇÃO",
+    q: "Quantos QUADRADOS existem em um\ntabuleiro de xadrez 8×8?\n\n(Não apenas os 64 pequenos!)",
+    ops: ["A) 64","B) 100","C) 164","D) 204"],
+    resp: "D",
+    exp: "Soma de todos os quadrados possíveis:\n8²+7²+6²+5²+4²+3²+2²+1² = 64+49+36+25+16+9+4+1 = 204."
+  },
+  {
+    cat: "PERCEPÇÃO",
+    q: "Uma vela leva 1 hora para queimar\naté a metade. Quanto tempo leva\npara queimar completamente?",
+    ops: ["A) 2 horas — é proporcional","B) Menos de 2h — parte fina queima rápido","C) Mais de 2h — depende da vela","D) Impossível calcular sem mais dados"],
+    resp: "D",
+    exp: "Sem saber o formato (cilíndrica, cônica) e composição da cera, é impossível calcular. Testa resistência à resposta óbvia."
+  },
+  {
+    cat: "PERCEPÇÃO",
+    q: "Qual número vem a seguir?\n\n   1  →  11  →  21  →  1211  →  111221  →  ___",
+    ops: ["A) 312211","B) 1112221","C) 112221","D) 12321"],
+    resp: "A",
+    exp: "Sequência 'Look and Say': descreva o anterior em voz alta.\n111221 = três 1s, dois 2s, um 1 → '312211'."
+  }
 ];
-const tempos = ['2 min', '15 min', '1 hora', '3 horas', '23 horas', 'ontem'];
 
-function atualizarProvaSocial(){
-  const nomeAleatorio = nomes[Math.floor(Math.random() * nomes.length)];
-  const tempoAleatorio = tempos[Math.floor(Math.random() * tempos.length)];
-  
-  document.getElementById('social-name').textContent = nomeAleatorio;
-  document.getElementById('social-time').textContent = tempoAleatorio;
-}
-// Atualiza a cada 30-60 segundos
-setInterval(atualizarProvaSocial, 45000);
-atualizarProvaSocial();
+let idx = 0, acertos = 0, erros = 0, historico = [], nomeUsuario = "";
 
-// 🎬 ABRIR VÍDEO
-function abrirVideo(){
-  document.getElementById('video-container').style.display = 'block';
-  // Opcional: rolar até o vídeo
-  document.querySelector('#video-container').scrollIntoView({behavior:'smooth', block:'center'});
+function iniciarTeste() {
+  nomeUsuario = document.getElementById("nome-input").value.trim() || "Participante";
+  document.getElementById("screen-intro").style.display = "none";
+  document.getElementById("screen-question").style.display = "block";
+  mostrarQuestao();
 }
 
-// FAQ toggle
-document.querySelectorAll('.faq-q').forEach(btn => {  btn.addEventListener('click', () => {
-    const item = btn.closest('.faq-item');
-    item.classList.toggle('open');
+function mostrarQuestao() {
+  const q = questoes[idx];
+  const total = questoes.length;
+
+  document.getElementById("progress-fill").style.width = (idx / total * 100) + "%";
+  document.getElementById("q-num").textContent = `Questão ${idx+1} / ${total}  ·  ${nomeUsuario}`;
+  document.getElementById("cat-tag").textContent = q.cat;
+  document.getElementById("chip-ok").textContent = `✔ ${acertos} acerto${acertos!==1?"s":""}`;
+  document.getElementById("chip-err").textContent = `✘ ${erros} erro${erros!==1?"s":""}`;
+  document.getElementById("q-text").textContent = q.q;
+
+  const grid = document.getElementById("options-grid");
+  grid.innerHTML = "";
+  ["A","B","C","D"].forEach((letra, i) => {
+    const btn = document.createElement("button");
+    btn.className = "opt-btn";
+    btn.innerHTML = `<span class="letter">${letra}</span><span>${q.ops[i]}</span>`;
+    btn.onclick = () => responder(letra, btn);
+    grid.appendChild(btn);
   });
+
+  const fb = document.getElementById("feedback-box");
+  fb.className = "feedback-box";
+  document.getElementById("btn-next").className = "btn-next";
+
+  document.getElementById("screen-question").style.animation = "none";
+  document.getElementById("screen-question").offsetHeight;
+  document.getElementById("screen-question").style.animation = "fadeUp .35s ease both";
+}
+
+function responder(letra, btnClicado) {
+  const q = questoes[idx];
+  const correto = letra === q.resp;
+
+  if (correto) acertos++; else erros++;
+
+  historico.push({ n: idx+1, cat: q.cat, sua: letra, certa: q.resp, ok: correto, texto: q.q });
+
+  document.querySelectorAll(".opt-btn").forEach((b, i) => {
+    b.disabled = true;
+    const l = ["A","B","C","D"][i];
+    if (l === q.resp) b.classList.add("correct");
+    else if (l === letra && !correto) b.classList.add("wrong");
+  });
+
+  const fb = document.getElementById("feedback-box");
+  if (correto) {
+    fb.className = "feedback-box correct-fb show";
+    document.getElementById("feedback-title").textContent = "✔  Correto!";
+  } else {
+    fb.className = "feedback-box wrong-fb show";
+    document.getElementById("feedback-title").textContent = `✘  Errado!  Resposta correta: ${q.resp}`;
+  }
+  document.getElementById("feedback-exp").textContent = q.exp;
+
+  const bnNext = document.getElementById("btn-next");
+  bnNext.className = "btn-next show";
+  bnNext.textContent = idx < questoes.length - 1 ? "Próxima questão →" : "Ver resultado →";
+}
+
+function proximaQuestao() {
+  idx++;
+  if (idx >= questoes.length) {
+    mostrarResultado();
+  } else {
+    mostrarQuestao();
+  }
+}
+
+function mostrarResultado() {
+  document.getElementById("screen-question").style.display = "none";
+  const res = document.getElementById("screen-result");
+  res.style.display = "block";
+
+  const total = questoes.length;
+  const pts = acertos * 5;
+  const pct = Math.round(acertos / total * 100);
+
+  // Score animado
+  const scoreEl = document.getElementById("res-score");
+  let count = 0;
+  const interval = setInterval(() => {
+    count += 2;
+    scoreEl.textContent = Math.min(count, pts);
+    if (count >= pts) clearInterval(interval);
+  }, 20);
+
+  document.getElementById("res-acertos").textContent = acertos;
+  document.getElementById("res-erros").textContent = erros;
+  document.getElementById("res-pct").textContent = pct + "%";
+
+  // Nível
+  let nivel, classe;
+  if (pct === 100)    { nivel = "EXCEPCIONAL — QI 130+";        classe = "nivel-exc";   scoreEl.style.color = "var(--green)"; }
+  else if (pct >= 85) { nivel = "ALTO DESEMPENHO — QI ~120-130"; classe = "nivel-alto";  scoreEl.style.color = "#a78bfa"; }
+  else if (pct >= 65) { nivel = "ACIMA DA MÉDIA — QI ~110-120";  classe = "nivel-acima"; scoreEl.style.color = "var(--gold)"; }
+  else if (pct >= 50) { nivel = "MÉDIA — QI ~100-110";           classe = "nivel-med";   scoreEl.style.color = "var(--accent2)"; }
+  else                { nivel = "EM DESENVOLVIMENTO";            classe = "nivel-dev";   scoreEl.style.color = "var(--red)"; }
+
+  const nivelEl = document.getElementById("res-nivel");
+  nivelEl.textContent = nivel;
+  nivelEl.className = `result-nivel ${classe}`;
+
+  // Por categoria
+  const cats = {};
+  historico.forEach(h => {
+    if (!cats[h.cat]) cats[h.cat] = { a: 0, t: 0 };
+    cats[h.cat].t++;
+    if (h.ok) cats[h.cat].a++;
+  });
+
+  const catsDiv = document.getElementById("cats-result");
+  catsDiv.innerHTML = "";
+  Object.entries(cats).forEach(([cat, d]) => {
+    const pctC = Math.round(d.a / d.t * 100);
+    catsDiv.innerHTML += `
+      <div class="cat-row">
+        <span class="cat-name">${cat}</span>
+        <div class="cat-bar-wrap">
+          <div class="cat-bar-fill" style="width:0%" data-pct="${pctC}"></div>
+        </div>
+        <span class="cat-score">${d.a}/${d.t}</span>
+      </div>`;
+  });
+
+  setTimeout(() => {
+    document.querySelectorAll(".cat-bar-fill").forEach(el => {
+      el.style.width = el.dataset.pct + "%";
+    });
+  }, 300);
+
+  // Erradas
+  const erradas = historico.filter(h => !h.ok);
+  if (erradas.length > 0) {
+    document.getElementById("wrong-section").style.display = "block";
+    const wl = document.getElementById("wrong-list");
+    wl.innerHTML = "";
+    erradas.forEach(h => {
+      wl.innerHTML += `
+        <div class="wrong-item">
+          <div class="q-info">
+            <strong>Q${h.n} · ${h.cat}</strong>
+            ${h.texto.split("\n")[0]}
+          </div>
+          <div class="wrong-resp">
+            <span class="resp-chip sua">Sua: ${h.sua}</span>
+            <span class="resp-chip certa">Certa: ${h.certa}</span>
+          </div>
+        </div>`;
+    });
+  }
+}
+
+function reiniciar() {
+  idx = 0; acertos = 0; erros = 0; historico = [];
+  document.getElementById("screen-result").style.display = "none";
+  document.getElementById("wrong-section").style.display = "none";
+  document.getElementById("screen-intro").style.display = "flex";
+  document.getElementById("nome-input").value = nomeUsuario;
+}
+
+document.getElementById("nome-input").addEventListener("keydown", e => {
+  if (e.key === "Enter") iniciarTeste();
 });
-
-// Scroll reveal
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if(e.isIntersecting){ e.target.classList.add('visible'); }
-  });
-}, { threshold: 0.12 });
-
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
