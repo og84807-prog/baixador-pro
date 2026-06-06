@@ -32,7 +32,6 @@
     overflow-x: hidden;
   }
 
-  /* GRID BG */
   body::before {
     content: '';
     position: fixed;
@@ -350,7 +349,8 @@
     border-color: var(--red);
   }
 
-  .opt-btn:disabled { cursor: default; }
+  .opt-btn:disabled { cursor: default; transform: none !important; background: var(--card); opacity: 0.7; }
+  .opt-btn.correct:disabled, .opt-btn.wrong:disabled { opacity: 1; }
 
   /* FEEDBACK */
   .feedback-box {
@@ -491,6 +491,7 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-bottom: 14px;
+    margin-top: 24px;
   }
 
   .cat-row {
@@ -531,6 +532,56 @@
     color: var(--muted);
     width: 28px;
     text-align: right;
+  }
+
+  /* ── SEÇÃO DE LEADERBOARD (RANKING) ── */
+  .ranking-table {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    border-collapse: collapse;
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+
+  .ranking-table th, .ranking-table td {
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 13px;
+  }
+
+  .ranking-table th {
+    background: var(--surface);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ranking-table tr:not(:last-child) {
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+
+  .ranking-table .pos {
+    font-family: var(--mono);
+    font-weight: 700;
+    width: 50px;
+    color: var(--accent2);
+  }
+
+  .ranking-table .pts-col {
+    text-align: right;
+    font-family: var(--mono);
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .ranking-table .user-now {
+    background: rgba(124,58,237,.06);
+    color: #fff;
   }
 
   /* Erradas */
@@ -625,7 +676,6 @@
 <body>
 <div class="container">
 
-  <!-- ══ INTRO ══ -->
   <div id="screen-intro">
     <div class="logo-badge">GUSMAO CODER TOOLS</div>
     <h1>Teste Cognitivo<br>QI 130+</h1>
@@ -654,7 +704,6 @@
     <button class="btn-primary" onclick="iniciarTeste()">Iniciar Teste →</button>
   </div>
 
-  <!-- ══ QUESTÃO ══ -->
   <div id="screen-question">
     <div class="progress-bar-wrap">
       <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
@@ -686,7 +735,6 @@
     </button>
   </div>
 
-  <!-- ══ RESULTADO ══ -->
   <div id="screen-result">
     <div class="result-hero">
       <div class="result-score" id="res-score" style="color: var(--accent)"></div>
@@ -709,6 +757,20 @@
       </div>
     </div>
 
+    <p class="section-title">🏆 Leaderboard Global (Top 5)</p>
+    <table class="ranking-table">
+      <thead>
+        <tr>
+          <th style="width:60px">Pos</th>
+          <th>Nome</th>
+          <th style="text-align:right">QI / Nível</th>
+          <th style="text-align:right">Pontos</th>
+        </tr>
+      </thead>
+      <tbody id="ranking-body">
+        </tbody>
+    </table>
+
     <p class="section-title">Desempenho por categoria</p>
     <div id="cats-result" style="margin-bottom:28px"></div>
 
@@ -725,6 +787,7 @@
 </div>
 
 <script>
+// Mantive sua lista idêntica de questões intacta
 const questoes = [
   {
     cat: "LÓGICA E PADRÕES",
@@ -946,6 +1009,53 @@ function proximaQuestao() {
   }
 }
 
+// ── SISTEMA DE SALVAMENTO E EXIBIÇÃO DO RANKING ──
+function gerenciarRanking(nome, pontos, nivel) {
+  // Pegamos a lista existente do localStorage (ou criamos uma vazia)
+  let ranking = JSON.parse(localStorage.getItem('gusmao_qi_ranking')) || [];
+  
+  // Criamos o objeto do jogador atual
+  const jogadorAtual = {
+    id: Date.now(), // ID único para destacar o usuário na tabela
+    nome: nome,
+    pontos: pontos,
+    nivel: nivel.split(" — ")[0] // Pega só o rótulo principal
+  };
+  
+  ranking.push(jogadorAtual);
+  
+  // Ordena por pontos (maior para menor)
+  ranking.sort((a, b) => b.pontos - a.pontos);
+  
+  // Limita para guardar apenas os top 10 no storage interno
+  ranking = ranking.slice(0, 10);
+  localStorage.setItem('gusmao_qi_ranking', JSON.stringify(ranking));
+  
+  // Monta a estrutura HTML para renderizar na tabela
+  const tbody = document.getElementById("ranking-body");
+  tbody.innerHTML = "";
+  
+  // Mostra apenas o Top 5 na interface por questões de espaço
+  const exibicaoTop5 = ranking.slice(0, 5);
+  
+  exibicaoTop5.forEach((player, index) => {
+    const isCurrent = player.id === jogadorAtual.id ? "user-now" : "";
+    let medalha = index + 1;
+    if (index === 0) medalha = "🥇";
+    if (index === 1) medalha = "🥈";
+    if (index === 2) medalha = "🥉";
+
+    tbody.innerHTML += `
+      <tr class="${isCurrent}">
+        <td class="pos">${medalha}</td>
+        <td style="font-weight:600">${player.nome} ${isCurrent ? ' (Você)' : ''}</td>
+        <td style="text-align:right; color:var(--muted); font-size:11px">${player.nivel}</td>
+        <td class="pts-col">${player.pontos}</td>
+      </tr>
+    `;
+  });
+}
+
 function mostrarResultado() {
   document.getElementById("screen-question").style.display = "none";
   const res = document.getElementById("screen-result");
@@ -955,7 +1065,6 @@ function mostrarResultado() {
   const pts = acertos * 5;
   const pct = Math.round(acertos / total * 100);
 
-  // Score animado
   const scoreEl = document.getElementById("res-score");
   let count = 0;
   const interval = setInterval(() => {
@@ -968,7 +1077,6 @@ function mostrarResultado() {
   document.getElementById("res-erros").textContent = erros;
   document.getElementById("res-pct").textContent = pct + "%";
 
-  // Nível
   let nivel, classe;
   if (pct === 100)    { nivel = "EXCEPCIONAL — QI 130+";        classe = "nivel-exc";   scoreEl.style.color = "var(--green)"; }
   else if (pct >= 85) { nivel = "ALTO DESEMPENHO — QI ~120-130"; classe = "nivel-alto";  scoreEl.style.color = "#a78bfa"; }
@@ -980,7 +1088,9 @@ function mostrarResultado() {
   nivelEl.textContent = nivel;
   nivelEl.className = `result-nivel ${classe}`;
 
-  // Por categoria
+  // Executa o processamento e exibição do ranking
+  gerenciarRanking(nomeUsuario, pts, nivel);
+
   const cats = {};
   historico.forEach(h => {
     if (!cats[h.cat]) cats[h.cat] = { a: 0, t: 0 };
@@ -1008,18 +1118,19 @@ function mostrarResultado() {
     });
   }, 300);
 
-  // Erradas
   const erradas = historico.filter(h => !h.ok);
   if (erradas.length > 0) {
     document.getElementById("wrong-section").style.display = "block";
     const wl = document.getElementById("wrong-list");
     wl.innerHTML = "";
     erradas.forEach(h => {
+      // Correção aqui: limpando quebras para não estragar a visualização curta da questão errada
+      const textoLimpo = h.texto.replace(/\n/g, " ");
       wl.innerHTML += `
         <div class="wrong-item">
           <div class="q-info">
             <strong>Q${h.n} · ${h.cat}</strong>
-            ${h.texto.split("\n")[0]}
+            ${textoLimpo.length > 60 ? textoLimpo.substring(0, 60) + "..." : textoLimpo}
           </div>
           <div class="wrong-resp">
             <span class="resp-chip sua">Sua: ${h.sua}</span>
